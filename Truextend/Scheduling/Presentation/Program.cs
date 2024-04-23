@@ -1,16 +1,33 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-// Add services to the container.
+namespace Truextend.Scheduling.Presentation
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            builder.Configuration.SetBasePath(builder.Environment.ContentRootPath);
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: false, reloadOnChange: true);
+            builder.Configuration.AddEnvironmentVariables();
 
-builder.Services.AddControllers();
+            // Add services to the container.
 
-var app = builder.Build();
+            builder.Services.AddControllers();
 
-// Configure the HTTP request pipeline.
+            var app = builder.Build();
 
-app.UseAuthorization();
+            // Configure the HTTP request pipeline.
 
-app.MapControllers();
+            app.UseAuthorization();
 
-app.Run();
+            app.MapControllers();
+
+            app.Run();
+        }
+    }
+}
 
