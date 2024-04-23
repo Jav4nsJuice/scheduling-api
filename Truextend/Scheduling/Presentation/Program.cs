@@ -69,7 +69,7 @@ namespace Truextend.Scheduling.Presentation
 
             var app = builder.Build();
 
-            app.UseMiddleware<ExceptionHandlerMiddleware>();
+            //app.UseMiddleware<ExceptionHandlerMiddleware>();
             app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
             app.UseRouting();
