@@ -82,7 +82,6 @@ namespace Truextend.Scheduling.Presentation.Controllers.Base
 
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(void), (int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.UnprocessableEntity)]
@@ -101,7 +100,6 @@ namespace Truextend.Scheduling.Presentation.Controllers.Base
 
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(void), (int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.UnprocessableEntity)]
