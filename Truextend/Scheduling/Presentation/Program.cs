@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 
@@ -34,13 +38,34 @@ namespace Truextend.Scheduling.Presentation
                 );
             });
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
+            builder.Services.AddSwaggerGenNewtonsoftSupport();
+            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = builder.Configuration.GetSection("SchedulingAPIInfo")["Name"],
+                    Version = builder.Configuration.GetSection("SchedulingAPIInfo")["Version"],
+                    Description = builder.Configuration.GetSection("SchedulingAPIInfo")["Description"],
+                    Contact = new OpenApiContact
+                    {
+                        Name = builder.Configuration.GetSection("SchedulingAPIInfo")["Contact:Name"],
+                        Email = builder.Configuration.GetSection("SchedulingAPIInfo")["Contact:Email"]
+                    }
+                });
+            });
+
+            builder.Services.ConfigureSwaggerGen(options =>
+            {
+                options.EnableAnnotations();
+
+                var file = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var filePath = Path.Combine(AppContext.BaseDirectory, file);
+                options.IncludeXmlComments(filePath);
+            });
 
             var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
 
             app.UseAuthorization();
 
