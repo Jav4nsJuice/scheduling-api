@@ -5,9 +5,6 @@
     <RootNamespace>Truextend.Scheduling.Data</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' ">
-    <ExternalConsole>true</ExternalConsole>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
@@ -21,6 +18,7 @@
     </PackageReference>
     <PackageReference Include="Serilog" Version="3.1.1" />
   </ItemGroup>
+
   <ItemGroup>
     <None Remove="Exceptions\" />
     <None Remove="Models\" />
