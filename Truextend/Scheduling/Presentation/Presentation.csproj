@@ -37,4 +37,14 @@
     <ProjectReference Include="..\Logic\Logic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="logs\" />
+    <None Remove="Middleware\" />
+    <None Remove="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="logs\" />
+    <Folder Include="Middleware\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
 </Project>
