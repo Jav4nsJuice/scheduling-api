@@ -41,10 +41,12 @@
     <None Remove="logs\" />
     <None Remove="Middleware\" />
     <None Remove="Controllers\" />
+    <None Remove="Controllers\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="logs\" />
     <Folder Include="Middleware\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Controllers\Base\" />
   </ItemGroup>
 </Project>
