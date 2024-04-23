@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Truextend.Scheduling.Logic.Managers.Base;
 
-namespace Truextend.Rewards.Presentation.Controllers.Base
+namespace Truextend.Scheduling.Presentation.Controllers.Base
 {
 	[ApiController]
 	public class BaseSchedulingController<T> : ControllerBase where T : class
