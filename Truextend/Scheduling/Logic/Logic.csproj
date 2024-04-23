@@ -18,11 +18,13 @@
     <None Remove="Managers\" />
     <None Remove="Models\" />
     <None Remove="Managers\Base\" />
+    <None Remove="Models\Validation\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="Managers\" />
     <Folder Include="Models\" />
     <Folder Include="Managers\Base\" />
+    <Folder Include="Models\Validation\" />
   </ItemGroup>
 </Project>
