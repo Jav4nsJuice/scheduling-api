@@ -2,11 +2,13 @@
 using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Truextend.Scheduling.Presentation
 {
@@ -67,7 +69,16 @@ namespace Truextend.Scheduling.Presentation
 
             var app = builder.Build();
 
-            app.UseAuthorization();
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+            app.UseCors("AllowAnyOrigin");
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", builder.Configuration.GetSection("SchedulingAPIInfo")["Name"]);
+                c.DocExpansion(DocExpansion.None);
+            });
 
             app.MapControllers();
 
