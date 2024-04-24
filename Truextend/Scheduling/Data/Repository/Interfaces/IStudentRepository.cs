@@ -4,9 +4,6 @@ using Truextend.Scheduling.Data.Repository.Base;
 
 namespace Truextend.Scheduling.Data.Repository.Interfaces
 {
-	public interface IStudentRepository
-	{
-        public interface IStudentRepository : IRepository<Student> { }
-    }
+	public interface IStudentRepository : IRepository<Student> { }
 }
 

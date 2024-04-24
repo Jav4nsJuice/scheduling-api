@@ -1,39 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Truextend.Scheduling.Data.Exceptions;
 using Truextend.Scheduling.Data.Models.Base;
 
 namespace Truextend.Scheduling.Data.Repository.Base
 {
 	public class Repository<T> : IRepository<T> where T : Entity
 	{
-		public Repository()
+        protected readonly SchedulingDBContext dbContext;
+
+		public Repository(SchedulingDBContext dbContext)
 		{
-		}
-
-        public Task<T> CreateAsync(T entity)
-        {
-            throw new NotImplementedException();
+            this.dbContext = dbContext;
         }
 
-        public Task<T> DeleteAsync(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                entity.Id = Guid.Empty;
+                dbContext.Set<T>().Add(entity);
+                await dbContext.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception e)
+            {
+                throw new DatabaseException("ERROR: " + e.InnerException.Message);
+            }
         }
 
-        public Task<IEnumerable<T>> GetAllAsync()
+        public async Task<T> DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            dbContext.Set<T>().Remove(entity);
+            await dbContext.SaveChangesAsync();
+            return entity;
         }
 
-        public Task<T> GetByIdAsync(Guid id)
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var asd = dbContext.Set<T>();
+            List<T> values = await asd.ToListAsync();
+            return values;
         }
 
-        public Task<T> UpdateAsync(T entity)
+        public async Task<T> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            T value = await dbContext.Set<T>().FindAsync(id);
+            return value;
+        }
+
+        public async Task<T> UpdateAsync(T entity)
+        {
+            dbContext.Entry(entity).State = EntityState.Modified;
+            await dbContext.SaveChangesAsync();
+            return entity;
         }
     }
 }
