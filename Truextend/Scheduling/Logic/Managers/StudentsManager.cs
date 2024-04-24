@@ -69,6 +69,11 @@ namespace Truextend.Scheduling.Logic.Managers
             Student studentToEdit = await _uow.StudentRepository.GetByIdAsync(id)
                 ?? throw new NotFoundException($"Student with ID {id} not found");
 
+            if (!studentDto.IsValid())
+            {
+                throw new BadRequestException("Invalid state", studentDto.GetErrors());
+            }
+
             studentDto.Id = id;
             _mapper.Map(studentDto, studentToEdit);
             Student updateResponse = await _uow.StudentRepository.UpdateAsync(studentToEdit);

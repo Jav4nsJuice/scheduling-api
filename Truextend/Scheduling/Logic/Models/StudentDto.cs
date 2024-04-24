@@ -14,12 +14,20 @@ namespace Truextend.Scheduling.Logic.Models
         public override bool IsValid()
         {
             Regex regex = new Regex(@"^[a-zA-Z\s]+$");
-            if (!regex.IsMatch(FirstName))
+            if (!regex.IsMatch(FirstName) || string.IsNullOrWhiteSpace(FirstName))
             {
                 AddError(new ValidationError
                 {
                     Field = "FirstName",
-                    Message = "FirstName can't have numbers or special characters."
+                    Message = "FirstName can't have numbers, special characters or white spaces."
+                });
+            }
+            if (!regex.IsMatch(LastName) || string.IsNullOrWhiteSpace(FirstName))
+            {
+                AddError(new ValidationError
+                {
+                    Field = "LastName",
+                    Message = "LastName can't have numbers, special characters or white spaces."
                 });
             }
             return !Errors.Any();
