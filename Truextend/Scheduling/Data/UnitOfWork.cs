@@ -12,12 +12,14 @@ namespace Truextend.Scheduling.Data
         private readonly SchedulingDBContext _schedulingDBContext;
         private readonly IStudentRepository _student;
         private readonly ICourseRepository _course;
+        private readonly IStudentCourseRepository _studentCourse;
 
         public UnitOfWork(SchedulingDBContext dbContext)
 		{
             _schedulingDBContext = dbContext;
             _student = new StudentRepository(_schedulingDBContext);
             _course = new CourseRepository(_schedulingDBContext);
+            _studentCourse = new StudentCourseRepository(_schedulingDBContext);
         }
 
         public void BeginTransaction()
@@ -73,6 +75,11 @@ namespace Truextend.Scheduling.Data
         public ICourseRepository CourseRepository
         {
             get { return _course; }
+        }
+
+        public IStudentCourseRepository StudentCourseRepository
+        {
+            get { return _studentCourse; }
         }
     }
 }

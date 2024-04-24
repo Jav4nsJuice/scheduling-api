@@ -7,6 +7,8 @@ namespace Truextend.Scheduling.Data
 	{
 		IStudentRepository StudentRepository { get; }
         ICourseRepository CourseRepository { get; }
+        IStudentCourseRepository StudentCourseRepository { get; }
+
         void BeginTransaction();
         void CommitTransaction();
         void RollBackTransaction();
