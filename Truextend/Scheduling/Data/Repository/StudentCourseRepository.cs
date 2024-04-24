@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Truextend.Scheduling.Data.Models;
@@ -31,6 +32,13 @@ namespace Truextend.Scheduling.Data.Repository
                 .Set<StudentCourse>()
                 .Where(u => u.StudentId == studentId)
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<StudentCourse>> GetStudentsOnCourse(Guid courseId)
+        {
+            var studentCourse = await GetAllAsync();
+            studentCourse = studentCourse.Where(sc => sc.CourseId == courseId);
+            return studentCourse;
         }
     }
 }
