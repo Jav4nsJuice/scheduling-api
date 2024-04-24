@@ -9,6 +9,7 @@ namespace Truextend.Scheduling.Logic.Managers.Interfaces
 	{
         Task<IEnumerable<StudentCourseDto>> GetAll();
         Task<IEnumerable<StudentCourseDto>> GetAllByStudentId(Guid studentId);
+        Task<IEnumerable<StudentCourseDto>> GetAllByCourseId(Guid courseId);
         Task<IEnumerable<StudentCourseDto>> GetAllByStudentIdAndCourseId(Guid studentId, Guid courseId);
     }
 }
