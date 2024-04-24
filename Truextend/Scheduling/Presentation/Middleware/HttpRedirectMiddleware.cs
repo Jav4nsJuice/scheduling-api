@@ -32,6 +32,10 @@ namespace Truextend.Scheduling.Presentation.Middleware
             {
                 await _next.Invoke(context);
             }
+            else
+            {
+                await _next.Invoke(context);
+            }
         }
     }
 

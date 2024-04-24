@@ -10,7 +10,7 @@ namespace Truextend.Scheduling.Data.Repository
 	{
         private readonly IConfiguration _configuration;
 
-        public SchedulingDBContext(DbContextOptions<SchedulingDBContext> options, IConfiguration configuration) : base(options)
+        public SchedulingDBContext(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -21,7 +21,7 @@ namespace Truextend.Scheduling.Data.Repository
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(_configuration.GetConnectionString("SchedulingConnection"));
+                optionsBuilder.UseSqlServer(_configuration.GetSection("ConnectionStrings").GetSection("SchedulingConnection").Value);
             }
         }
 

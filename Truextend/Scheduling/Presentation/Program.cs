@@ -41,6 +41,7 @@ namespace Truextend.Scheduling.Presentation
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowAnyOrigin()
+                        .WithExposedHeaders("Authorization")
                 );
             });
 

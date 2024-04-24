@@ -15,11 +15,7 @@ namespace Truextend.Scheduling.Data
         public UnitOfWork(SchedulingDBContext dbContext)
 		{
             _schedulingDBContext = dbContext;
-        }
-
-        public IStudentRepository StudentRepository
-        {
-            get { return _student; }
+            _student = new StudentRepository(_schedulingDBContext);
         }
 
         public void BeginTransaction()
@@ -65,6 +61,11 @@ namespace Truextend.Scheduling.Data
                 Log.Error(ex, $"{message}{Environment.NewLine} Stack trace: {Environment.NewLine}");
                 throw new DatabaseException("Can not save changes, error in Database", ex.InnerException);
             }
+        }
+
+        public IStudentRepository StudentRepository
+        {
+            get { return _student; }
         }
     }
 }
