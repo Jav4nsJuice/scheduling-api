@@ -19,6 +19,8 @@
     <None Remove="Models\" />
     <None Remove="Managers\Base\" />
     <None Remove="Models\Validation\" />
+    <None Remove="Managers\Interfaces\" />
+    <None Remove="Models\Mapper\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
@@ -26,5 +28,7 @@
     <Folder Include="Models\" />
     <Folder Include="Managers\Base\" />
     <Folder Include="Models\Validation\" />
+    <Folder Include="Managers\Interfaces\" />
+    <Folder Include="Models\Mapper\" />
   </ItemGroup>
 </Project>
