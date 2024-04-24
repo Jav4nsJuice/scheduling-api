@@ -12,7 +12,7 @@ namespace Truextend.Scheduling.Data.Repository.Interfaces
 
         Task<IEnumerable<StudentCourse>> GetAllByStudentIdAndCourseIdAsync(Guid studentId, Guid courseId);
 
-        Task<IEnumerable<StudentCourse>> GetStudentsOnCourse(Guid courseId);
+        Task<IEnumerable<StudentCourse>> GetAllByCourseIdAsync(Guid courseId);
     }
 }
 
