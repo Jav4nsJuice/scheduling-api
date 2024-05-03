@@ -48,6 +48,7 @@ namespace Truextend.Scheduling.Presentation
             builder.Services.AddDbContext<SchedulingDBContext>();
             builder.Services.AddTransient<IStudentsManager, StudentsManager>();
             builder.Services.AddTransient<ICoursesManager, CoursesManager>();
+            builder.Services.AddTransient<IStudentCoursesManager, StudentCoursesManager>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddControllers();

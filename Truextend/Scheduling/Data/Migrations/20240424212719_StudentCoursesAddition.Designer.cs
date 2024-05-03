@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Truextend.Scheduling.Data.Repository;
 
@@ -11,9 +12,11 @@ using Truextend.Scheduling.Data.Repository;
 namespace Truextend.Scheduling.Data.Migrations
 {
     [DbContext(typeof(SchedulingDBContext))]
-    partial class SchedulingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240424212719_StudentCoursesAddition")]
+    partial class StudentCoursesAddition
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
