@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using Truextend.Scheduling.Data;
@@ -20,6 +21,30 @@ namespace Truextend.Scheduling.Logic.Managers
 		{
             _uow = uow;
             _mapper = mapper;
+        }
+
+        public async Task<StudentCourseDto> AddToCourse(Guid studentId, Guid courseId)
+        {
+            _ = await _uow.StudentRepository.GetByIdAsync(studentId)
+                ?? throw new NotFoundException($"Student with studentId {studentId} not found");
+            _ = await _uow.CourseRepository.GetByIdAsync(courseId)
+                ?? throw new NotFoundException($"Course with ID {courseId} not found");
+
+            bool studentExistsInCourse = await StudentExistsInCourseAsync(courseId, studentId);
+
+            if (!studentExistsInCourse)
+            {
+                StudentCourse newStudentCourse = new()
+                {
+                    StudentId = studentId,
+                    CourseId = courseId
+                };
+                StudentCourse addToTeamResponse = await _uow.StudentCourseRepository.CreateAsync(newStudentCourse);
+                StudentCourseDto studentCourseDto = _mapper.Map<StudentCourseDto>(addToTeamResponse);
+
+                return studentCourseDto;
+            }
+            throw new AlreadyExistException("The student is already part of the course");
         }
 
         public async Task<StudentDto> Create(StudentDto studentDto)
@@ -79,6 +104,12 @@ namespace Truextend.Scheduling.Logic.Managers
             Student updateResponse = await _uow.StudentRepository.UpdateAsync(studentToEdit);
             StudentDto editedStudent = _mapper.Map<StudentDto>(updateResponse);
             return editedStudent;
+        }
+
+        private async Task<bool> StudentExistsInCourseAsync(Guid courseId, Guid studentId)
+        {
+            IEnumerable<StudentCourse> studentCourses = await _uow.StudentCourseRepository.GetStudentsOnCourse(courseId);
+            return studentCourses.Any(student => student.StudentId == studentId);
         }
     }
 }
