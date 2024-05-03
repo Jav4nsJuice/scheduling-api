@@ -19,7 +19,7 @@ This is the Coding Exercise for Tx Training Program
 
 2. **Open the Solution:**
 
-    Open the project solution file (`Truextend.Scheduling.sln`) in Visual Studio Community.
+    Open the project solution file (`Truextend.Scheduling.sln`) in Visual Studio Community. 
 
 3. **Restore NuGet Packages:**
 
@@ -30,7 +30,7 @@ This is the Coding Exercise for Tx Training Program
 
 4. **Build the Project:**
 
-    Build the project by selecting "Build > Build Solution" from the menu, or by pressing `Ctrl + Shift + B`.
+    Build the project by selecting "Build > Build Solution" from the menu, or by pressing `Ctrl + Shift + B`. We used SQL Server 2019 dockerized for Mac. And created the DB structure with the running of migrations
 
 5. **Run the Application:**
 
