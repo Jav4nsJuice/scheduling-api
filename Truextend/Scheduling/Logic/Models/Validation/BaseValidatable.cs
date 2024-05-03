@@ -7,7 +7,7 @@ namespace Truextend.Scheduling.Logic.Models.Validation
 	{
         protected IEnumerable<ValidationError> Errors;
 
-        public BaseValidatable()
+        protected BaseValidatable()
 		{
             Errors = new List<ValidationError>();
         }

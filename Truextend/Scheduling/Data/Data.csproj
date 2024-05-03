@@ -25,6 +25,7 @@
     <None Remove="Repository\" />
     <None Remove="Models\Base\" />
     <None Remove="Repository\Base\" />
+    <None Remove="Repository\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
@@ -32,5 +33,6 @@
     <Folder Include="Repository\" />
     <Folder Include="Models\Base\" />
     <Folder Include="Repository\Base\" />
+    <Folder Include="Repository\Interfaces\" />
   </ItemGroup>
 </Project>

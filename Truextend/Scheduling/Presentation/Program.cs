@@ -2,13 +2,17 @@
 using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Truextend.Scheduling.Data;
+using Truextend.Scheduling.Data.Repository;
+using Truextend.Scheduling.Logic.Managers;
+using Truextend.Scheduling.Logic.Managers.Interfaces;
+using Truextend.Scheduling.Presentation.Middleware;
 
 namespace Truextend.Scheduling.Presentation
 {
@@ -37,9 +41,14 @@ namespace Truextend.Scheduling.Presentation
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowAnyOrigin()
+                        .WithExposedHeaders("Authorization")
                 );
             });
 
+            builder.Services.AddDbContext<SchedulingDBContext>();
+            builder.Services.AddTransient<IStudentsManager, StudentsManager>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGenNewtonsoftSupport();
             builder.Services.AddSwaggerGen();
@@ -69,9 +78,10 @@ namespace Truextend.Scheduling.Presentation
 
             var app = builder.Build();
 
-            //app.UseMiddleware<ExceptionHandlerMiddleware>();
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
             app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
+            app.UseHttpRedirect();
             app.UseRouting();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
