@@ -10,6 +10,8 @@ namespace Truextend.Scheduling.Logic.Models.Mapper
 		{
             this.CreateMap<Student, StudentDto>()
                 .ReverseMap();
+            this.CreateMap<Course, CourseDto>()
+                .ReverseMap();
         }
 	}
 }

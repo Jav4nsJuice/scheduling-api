@@ -17,6 +17,8 @@ namespace Truextend.Scheduling.Data.Repository
 
 		public DbSet<Student> Student { get; set; }
 
+        public DbSet<Course> Course { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -33,6 +35,12 @@ namespace Truextend.Scheduling.Data.Repository
             {
                 entity.HasKey(p => p.Id)
                     .HasName("PK_Student_Id");
+            });
+
+            modelBuilder.Entity<Course>(entity =>
+            {
+                entity.HasKey(p => p.Id)
+                    .HasName("PK_Course_Id");
             });
 
             base.OnModelCreating(modelBuilder);
