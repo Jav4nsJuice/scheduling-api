@@ -34,7 +34,7 @@ namespace Truextend.Scheduling.Data.Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<StudentCourse>> GetStudentsOnCourse(Guid courseId)
+        public async Task<IEnumerable<StudentCourse>> GetAllByCourseIdAsync(Guid courseId)
         {
             var studentCourse = await GetAllAsync();
             studentCourse = studentCourse.Where(sc => sc.CourseId == courseId);

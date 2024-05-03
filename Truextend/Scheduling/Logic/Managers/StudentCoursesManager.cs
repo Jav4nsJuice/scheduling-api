@@ -27,6 +27,15 @@ namespace Truextend.Scheduling.Logic.Managers
             return _mapper.Map<IEnumerable<StudentCourseDto>>(studentCourses);
         }
 
+        public async Task<IEnumerable<StudentCourseDto>> GetAllByCourseId(Guid courseId)
+        {
+            _ = await _uow.CourseRepository.GetByIdAsync(courseId)
+                ?? throw new NotFoundException($"Course with courseId {courseId} not found");
+
+            IEnumerable<StudentCourse> studentCourses = await _uow.StudentCourseRepository.GetAllByCourseIdAsync(courseId);
+            return _mapper.Map<IEnumerable<StudentCourseDto>>(studentCourses);
+        }
+
         public async Task<IEnumerable<StudentCourseDto>> GetAllByStudentId(Guid studentId)
         {
             _ = await _uow.StudentRepository.GetByIdAsync(studentId)

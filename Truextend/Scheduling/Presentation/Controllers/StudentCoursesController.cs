@@ -72,6 +72,32 @@ namespace Truextend.Scheduling.Presentation.Controllers
         }
 
         /// <summary>
+        /// Get all Students from an specific Course.
+        /// </summary>
+        /// <remarks>
+        /// Get all of the Students by a given CourseId.
+        /// </remarks>
+        /// <param name="Id">Id of the Course.</param>
+        /// <returns>
+        /// A list of all the Students registered to a Course.
+        /// </returns>
+
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
+        [ProducesResponseType((int)HttpStatusCode.Conflict)]
+        [HttpGet]
+        [Route("course/{Id}")]
+        public async Task<ActionResult> GetAllByCourseIdAsync([FromRoute] Guid Id)
+        {
+            IEnumerable<StudentCourseDto> studentCoursesDto = await _studentCoursesManager.GetAllByCourseId(Id);
+            return Ok(new MiddlewareResponse<IEnumerable<StudentCourseDto>>(studentCoursesDto));
+        }
+
+        /// <summary>
         /// Get all Students Courses registries from an specific Student and an specific Course.
         /// </summary>
         /// <remarks>

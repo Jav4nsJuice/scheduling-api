@@ -108,7 +108,7 @@ namespace Truextend.Scheduling.Logic.Managers
 
         private async Task<bool> StudentExistsInCourseAsync(Guid courseId, Guid studentId)
         {
-            IEnumerable<StudentCourse> studentCourses = await _uow.StudentCourseRepository.GetStudentsOnCourse(courseId);
+            IEnumerable<StudentCourse> studentCourses = await _uow.StudentCourseRepository.GetAllByCourseIdAsync(courseId);
             return studentCourses.Any(student => student.StudentId == studentId);
         }
     }
