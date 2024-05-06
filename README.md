@@ -1,56 +1,88 @@
-# Project Name
+# Scheduling API
 
-This is the Coding Exercise for Tx Training Program
+This Coding Exercise was developed using MacOS Sonoma 14.4.1.
 
-## Table of Contents
+### Prerequisites
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- **Visual Studio Community**: Install Visual Studio Community.
+- **.NET 8.0**: Install version 8.0 of dotnet. The actual version used in this repository was: 8.0.100-rc.2.23502.2
+- **Docker**: Install Docker for the connection with SQL Server for DB.
+- **Database Management Tool**: Install DB Tool (For this tutorial we will use [DBeaver](https://dbeaver.io/download/) but you should have the same result at the end with any DB Management tool). 
 
 ## Installation
 
-1. **Clone the repository:**
+1. **DB Installation**
 
-    ```bash
-    git clone https://github.com/your-username/project-name.git](https://github.com/Jav4nsJuice/scheduling-api.git
-    ```
+    * Create a file named: "docker-compose.yml" wherever you like, and paste the following code:
 
-2. **Open the Solution:**
+```sh
+version: '3.8'
+services:
+    db-mssql:
+        image: tx-apps-images-registry:5000/mcr.microsoft.com/mssql/server:2019-CU10-ubuntu-20.04
+        ports:
+            - "4320:1433"
+        volumes:
+            - db-mssql-data:/var/opt/mssql
+        environment:
+            - "ACCEPT_EULA=Y"
+            - "SA_PASSWORD=1234567.a"
+            - "MSSQL_PID=Express"
+volumes:
+    db-mssql-data:
+```
 
-    Open the project solution file (`Truextend.Scheduling.sln`) in Visual Studio Community. 
+* Modify the Docker Engine that's in the Docker -> Settings -> Docker Engine by adding the following instruction:
 
-3. **Restore NuGet Packages:**
+```sh
+"insecure-registries": [
+    "tx-apps-images-registry:5000"
+  ] 
+```
 
-    Visual Studio should automatically restore the NuGet packages when you open the solution. However, if it doesn't, you can manually restore them:
+After the addition of the above command, then click Apply & Restart.
 
-    - Right-click on the solution in the Solution Explorer.
-    - Select "Restore NuGet Packages".
 
-4. **Build the Project:**
+* Run the docker-compose.yml by typing the following command in the Terminal (make sure to be in the same directory as your docker-compose.yml):
 
-    Build the project by selecting "Build > Build Solution" from the menu, or by pressing `Ctrl + Shift + B`. We used SQL Server 2019 dockerized for Mac. And created the DB structure with the running of migrations
+```sh
+$ docker-compose up
+```
 
-5. **Run the Application:**
+It will create a client ready to hear your connection SQL Server connection.
 
-    Set the Presentation startup project and run the application by pressing `F5` or selecting "Debug > Start Debugging" from the menu.
+* Create a new connection in your DB Management Tool (In this case, DBeaver) and select the connection for SQL Server.
 
-## Usage
+* Fill up the fields with the following data:
 
-This project has 4 pages:
-1. Home Page giving a Image Carousel and also the top Students and Courses, in which the Top Students are the ones with the most attended courses and the top courses are the ones who have more students inscripted.
-2. StudentCourse table with filter and pagination and also has a Add Resource button that adds a Student to a Course.
-3. Students Page with CRUD operations and filter.
-4. Courses Page with CRUD operations and filter. 
+```sh
+Host: localhost
+Database/Schema: master
+Port: 4320
+username: sa
+password: 1234567.a
+```
 
-## Contributing
+It will connect succesfully.
 
-1. Fork the repository.
-2. Creating branches (`US/S-TicketNumber-short-description`).
-3. Commiting your changes (`git commit -m 'US/S-TicketNumber: Description in past.'`).
-4. Push to the branch (`git push origin branch-name`).
+* Create a new DB and run the scripts that are located in ** scheduling-api/Truextend/Scheduling/Data/Data Seeding ** openning a New SQL Script in DBeaver.
 
-## License
+2. **Project Installation**
 
-Tx-SCheduling © 2024 Javier Alejandro Ferrel Rivera
+* Verify that the installation was succesfull:
+
+```sh
+$ dotnet --version
+```
+
+* Clone the repository:
+```sh
+$ git clone http://192.168.1.225/tx-internal-apps/rewards-api.git
+$ cd rewards-api
+$ git checkout develop
+```
+
+## Running the Project
+**From Visual Studio Community**
+* Open the **.sln** that's inside of Truextend/Scheduling and Visual Studio Community will deploy. 
+* Once Visual Studio Community has been opened run the project using the run button.
