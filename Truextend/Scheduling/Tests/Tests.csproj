@@ -20,4 +20,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Logic\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logic\" />
+  </ItemGroup>
 </Project>

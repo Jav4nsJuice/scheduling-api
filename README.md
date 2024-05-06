@@ -86,3 +86,8 @@ $ git checkout develop
 **From Visual Studio Community**
 * Open the **.sln** that's inside of Truextend/Scheduling and Visual Studio Community will deploy. 
 * Once Visual Studio Community has been opened run the project using the run button.
+
+## Testing the Project
+
+**From Visual Studio Community**
+- Click the Run Unit Tests in the Debug -> Run Unit Tests 
